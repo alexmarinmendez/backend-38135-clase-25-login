@@ -17,6 +17,9 @@ app.use(express.static('public'))
 let users = []
 
 app.post('/register', (req, res) => {
+    let { name } = req.body
+    let userExists = users.find(user => user.name === name)
+    if (userExists) return res.status(400).send({ error: "User already exists"})
     users.push(req.body)
-    console.log(users)
+    res.send({ message: "User registered!" })
 })
