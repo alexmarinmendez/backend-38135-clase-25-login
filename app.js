@@ -12,6 +12,6 @@ let baseSession = session({
 
 app.use(express.json())
 app.use(baseSession)
-app.use(express.static(__dirname + 'public'))
+app.use(express.static('public'))
 
 let users = []
