@@ -23,3 +23,14 @@ app.post('/register', (req, res) => {
     users.push(req.body)
     res.send({ message: "User registered!" })
 })
+
+app.post('/login', (req, res) => {
+    let user = users.find(user => user.name === req.body.name)
+    if (!user) return res.status(400).send({ error: "User not found"})
+    if (user.password!==req.body.password) return res.status(400).send({ error: "Password is not valid"})
+    req.session.user = {
+        name: user.name,
+        address: user.address
+    }
+    res.send({ message: "Logged In"})
+})
